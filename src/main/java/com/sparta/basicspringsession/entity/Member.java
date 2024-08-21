@@ -1,5 +1,6 @@
 package com.sparta.basicspringsession.entity;
 
+import com.sparta.basicspringsession.dto.MemberUpdateRequestDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,10 @@ public class Member {
     private String name;
 
     public Member(String name) {
+        this.name = name;
+    }
+
+    public void update(String name) {
         this.name = name;
     }
 }

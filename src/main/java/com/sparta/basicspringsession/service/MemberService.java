@@ -1,9 +1,6 @@
 package com.sparta.basicspringsession.service;
 
-import com.sparta.basicspringsession.dto.MemberDetailResponseDto;
-import com.sparta.basicspringsession.dto.MemberSaveRequestDto;
-import com.sparta.basicspringsession.dto.MemberSaveResponseDto;
-import com.sparta.basicspringsession.dto.MemberSimpleResponseDto;
+import com.sparta.basicspringsession.dto.*;
 import com.sparta.basicspringsession.entity.Member;
 import com.sparta.basicspringsession.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,6 +36,12 @@ public class MemberService {
     public MemberDetailResponseDto getMember(Long id){
         Member member = memberRepository.findById(id).orElseThrow(()->new NullPointerException("id is not found"));
         return new MemberDetailResponseDto(member.getId(),member.getName());
+    }
+
+    public MemberUpdateResponseDto updateMember(Long id, MemberUpdateRequestDto requestDto){
+        Member member = memberRepository.findById(id).orElseThrow(()->new NullPointerException("id is not found"));
+        member.update(requestDto.getName());
+        return new MemberUpdateResponseDto(member.getId(), member.getName());
     }
 
 
