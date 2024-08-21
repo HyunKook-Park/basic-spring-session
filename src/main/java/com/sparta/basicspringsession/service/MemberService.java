@@ -1,5 +1,6 @@
 package com.sparta.basicspringsession.service;
 
+import com.sparta.basicspringsession.dto.MemberDetailResponseDto;
 import com.sparta.basicspringsession.dto.MemberSaveRequestDto;
 import com.sparta.basicspringsession.dto.MemberSaveResponseDto;
 import com.sparta.basicspringsession.dto.MemberSimpleResponseDto;
@@ -29,11 +30,15 @@ public class MemberService {
         List<Member> members = memberRepository.findAll();
         List<MemberSimpleResponseDto> memberList = new ArrayList<>();
         for (Member member : members) {
-            MemberSimpleResponseDto responseDto = new MemberSimpleResponseDto();
+            MemberSimpleResponseDto responseDto = new MemberSimpleResponseDto(member.getName());
             memberList.add(responseDto);
         }
         return memberList;
+    }
 
+    public MemberDetailResponseDto getMember(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(()->new NullPointerException("id is not found"));
+        return new MemberDetailResponseDto(member.getId(),member.getName());
     }
 
 

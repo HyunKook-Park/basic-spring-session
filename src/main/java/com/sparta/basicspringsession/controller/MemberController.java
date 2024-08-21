@@ -1,5 +1,6 @@
 package com.sparta.basicspringsession.controller;
 
+import com.sparta.basicspringsession.dto.MemberDetailResponseDto;
 import com.sparta.basicspringsession.dto.MemberSaveRequestDto;
 import com.sparta.basicspringsession.dto.MemberSaveResponseDto;
 import com.sparta.basicspringsession.dto.MemberSimpleResponseDto;
@@ -21,9 +22,14 @@ public class MemberController {
         return ResponseEntity.ok(memberService.saveMember(requestDto));
     }
 
-    @GetMapping
+    @GetMapping("/members")
     public ResponseEntity<List<MemberSimpleResponseDto>> getMembers(){
         return ResponseEntity.ok(memberService.getMembers());
+    }
+
+    @GetMapping("members/{id}")
+    public ResponseEntity<MemberDetailResponseDto> getMember(@PathVariable Long id){
+        return ResponseEntity.ok(memberService.getMember(id));
     }
 
 }
