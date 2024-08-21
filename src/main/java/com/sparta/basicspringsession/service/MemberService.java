@@ -38,11 +38,17 @@ public class MemberService {
         return new MemberDetailResponseDto(member.getId(),member.getName());
     }
 
+    @Transactional
     public MemberUpdateResponseDto updateMember(Long id, MemberUpdateRequestDto requestDto){
         Member member = memberRepository.findById(id).orElseThrow(()->new NullPointerException("id is not found"));
         member.update(requestDto.getName());
         return new MemberUpdateResponseDto(member.getId(), member.getName());
     }
 
+    @Transactional
+    public void deleteMember(Long id){
+        Member member = memberRepository.findById(id).orElseThrow(()->new NullPointerException("id is not found"));
+        memberRepository.delete(member);
+    }
 
 }
